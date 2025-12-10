@@ -1,0 +1,7 @@
+{
+  "name": "Tex-Ops",
+  "description": "Smart Factory Manager for Indian textile factories. Analyze invoices, inventory shelves, and design sketches using AI.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

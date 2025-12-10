@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tex-Ops | Smart Factory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+            },
+            colors: {
+              primary: '#6366f1',
+              secondary: '#a855f7',
+              accent: '#ec4899',
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              'pulse-glow': {
+                '0%, 100%': { opacity: 1 },
+                '50%': { opacity: .5 },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+      
+      :root {
+        --glass-bg: rgba(15, 23, 42, 0.6);
+        --glass-border: rgba(148, 163, 184, 0.08);
+        --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        --primary-gradient: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+      }
+      
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+        color: #f8fafc;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      
+      /* THE GLASS CARD - The Masterpiece */
+      .glass-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: var(--glass-shadow);
+        border-radius: 24px;
+      }
+      
+      /* Floating Nav */
+      .glass-nav {
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 9999px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Inputs */
+      .glass-input {
+        background: rgba(2, 6, 23, 0.5);
+        border: 1px solid rgba(148, 163, 184, 0.1);
+        color: #f8fafc;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-radius: 12px;
+      }
+      .glass-input:focus {
+        border-color: #a855f7;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+        background: rgba(2, 6, 23, 0.8);
+      }
+
+      /* Buttons */
+      .btn-hyper {
+        background: var(--primary-gradient);
+        color: white;
+        font-weight: 600;
+        border-radius: 9999px; /* Pill shape */
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .btn-hyper:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4);
+      }
+      .btn-hyper:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: #94a3b8;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        transition: all 0.2s;
+      }
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      /* Table Styles - Redesigned */
+      .modern-table th {
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: #94a3b8;
+        font-weight: 700;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      }
+      .modern-table td {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.05);
+        vertical-align: middle;
+      }
+      .modern-table tr:last-child td {
+        border-bottom: none;
+      }
+      .modern-table tr:hover td {
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155; 
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569; 
+      }
+      
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
