@@ -40,7 +40,23 @@ export const PlanningView: React.FC<PlanningViewProps> = ({ inventory, orders, o
     });
     setPlanResult({ shortages, sufficient: shortages.length === 0 });
   };
+ const handleWhatsApp = (item: string, qtyNeeded: number, colorCode: string) => {
+  // 1. Create the message
+  const message = `Namaste, urgent requirement for order:
+  
+Item: ${item}
+Color Code: ${colorCode || 'N/A'}
+Quantity Needed: ${qtyNeeded} units
 
+Please confirm availability and best rate.`;
+
+  // 2. Convert to URL format
+  const encodedMessage = encodeURIComponent(message);
+  
+  // 3. Open WhatsApp (Web or App)
+  window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+};
+  
   const handleSaveOrder = () => {
     if (!orderName) return;
     const validReqs = requirements.filter(r => r.inventoryItemId && r.amountNeeded > 0);
